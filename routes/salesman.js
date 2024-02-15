@@ -5,6 +5,42 @@ const { DATE } = require("mysql/lib/protocol/constants/types");
 const db= require("../dbconfig")
 
 var app = express.Router({ mergeParams: true });
+app.get("/", (req,res)=>{
+    var fields= [
+        {name:"Stocks", link:"/sperson/stocks"}, 
+        {name:"Sales",  link:"/sperson/salesHistory"},
+        {name:"Add Stocks", link:"/sperson/addStock"}, 
+        {name:"Add Sale",  link:"/sperson/saleForm"},
+        {name:"Shift History", link:"/sperson/shiftHistory"}, 
+        {name:"Party List",  link:"/sperson/partyList"},
+        {name:"Product List",  link:"/sperson/productList"}
+      ];
+    res.render('dashboard', {title:"Salesman Dashboard", fields:fields});
+});
+
+app.get("/addStock", (req,res)=>{
+    var fields= [
+        {name:"ProdID", type:"text", placeholder:"Enter Product ID"}, 
+        {name:"ProdType", type:"text", placeholder:"Enter Product Type"}, 
+        {name:"amount", type:"number", placeholder:"Enter amount"}
+      ];
+      var action="/sperson/addStock";
+     res.render('form', {title:"Add Stock", action:action, fields:fields});
+});
+app.post('/addStock', (req,res)=>{
+    var prod_id= req.body.ProdID;
+    var prod_type= req.body.ProdType;
+    var amount= req.body.amount;
+
+    var sql="CALL add_Stock('"+prod_id+"', '"+prod_type+"', "+amount+");"
+    console.log(sql);
+    db.query(sql, function(error, results, fields){
+        if (error)console.error(error);
+        console.log("Stock Added")
+        res.redirect('/sperson/stocks');
+    });
+});
+
 
 app.get("/productList", (req,res)=>{
     var sql ="SELECT * FROM prod_list";
@@ -84,7 +120,6 @@ app.post("/saleForm", (req,res)=>{
             });
         }
     });
-   
 });
 
 module.exports = app;

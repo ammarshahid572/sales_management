@@ -2,7 +2,6 @@ body{
     margin: 0%;
     padding: 0%;
     background-image: url('/images/banner.img11.jpg');
-    
 }
 
 .logo {
@@ -293,11 +292,11 @@ table, th, td {
     /* border-collapse: collapse; */
     font-size: 21px;
     line-height: 34px;
-    padding: 19px 51px;
+    padding: 15px 20px;
 }
 table{
+    margin: auto;
     line-height: 40px;
-
 }
 
 .banner-content1 h1 {
@@ -316,23 +315,3 @@ table{
 .banner-content1{
     padding: 5%;
 }
-
-
-/*dash board start  */
-
-.btn-group-vertical button{
- padding: 20px 28px;
- margin: 40px;
- overflow-x: hidden;
-}
-
-.btn-group-vertical button {
-    padding: 20px 152px;
-
-}
-.banner-content{
-    padding: 30px;
-}
-
-
-/*dash board   end  */

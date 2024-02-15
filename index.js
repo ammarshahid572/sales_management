@@ -34,9 +34,9 @@ app.get('/logout', function(request, response){
 });
 
 app.get('/', function(request, response) {
+
 	response.sendFile(path.join(__dirname + '/login.html'));
 });
-
 
 app.post('/login', function(request, response) {    
 	var username = request.body.username;
@@ -50,11 +50,11 @@ app.post('/login', function(request, response) {
             if (results.length > 0) {
 				request.session.loggedin = true;
 				request.session.username = username;
-				
+								
 				results.forEach( function (data){
-					if (data.EMP_TYPE=="mngr")
+					if (data.EMP_TYPE=="MNGR")
 					response.redirect('/mngr/');
-					else if (data.user_type=="admin")
+					else if (data.user_type=="ADMIN")
 					response.redirect('/admin/');
 					else {
 						response.redirect('/sperson/');
